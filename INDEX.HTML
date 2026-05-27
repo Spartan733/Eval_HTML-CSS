@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,10 +15,10 @@
 
             <nav>
                 <ul>
-                    <li>Accueil</li>
-                    <li>A propos</li>
-                    <li>Projets</li>
-                    <li>Contact</li>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="about.html">A propos</a></li>
+                    <li><a href="#">Projets</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -113,14 +113,49 @@
                     </article>
                 </div>
 
-                <a href="" class="project"><button>Voir tous les projets</button></a>
+                <a href="#" class="project"><button>Voir tous les projets</button></a>
             </div>
+        </section>
+
+        <section class="Contact">
+            <div>
+                <h2>Contactez-moi</h2>
+                <p>Vous avez une question sur comment se déroule la formation ou sur ce que j'y apprend ? <br>N'hésitez pas à me   contacter !</p>
+                
+                
+                <div class="formulaire">
+                    <form action="">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="nom">
+                        <label for="email">Email</label>
+                        <input type="email" id="mail" name="email">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="Message" rows="10" cols="50"></textarea>
+                        <input type="checkbox"> J'accepte que mes données sois traitées conformément  à la politique de<br> confidentialité. Elles ne seront utilisées que pour répondre à ma demande.
+                    </form>
+
+                    <button>Envoyer le message</button>
+                </div>
+
+            </div>
+            
+           
 
         </section>
     </main>
 
     <footer>
+        <div>
+            <div class="foot">
+                <h3>Gabriel Bois</h3>
+                <p>Apprenti en dévelopement Web & Web Mobile</p>
+            </div>
 
+            <nav>
+                <li><i class="fa-brands fa-linkedin"></i></li>
+                <li><i class="fa-brands fa-github"></i></li>
+            </nav>
+    </div>
     </footer>
     
 </body>
