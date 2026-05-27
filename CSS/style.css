@@ -135,7 +135,7 @@ main{
 
         div{
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 1fr;
             margin: auto;
             justify-content: space-between;
             gap: 20px;
@@ -149,7 +149,65 @@ main{
                     font-size: 22px;
                 }
             }
+
+            .comp{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+
+                article{
+                    display: flex;
+                    flex-direction: column;
+
+                    i{
+                        font-size: 50px;
+                    }
+                }
+
+                
+            }
         }
 
+    }
+
+    .Projets{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+
+        div{
+            display: flex;
+            flex-direction: column;
+
+            h2{
+                margin: auto;
+            }
+
+            p{
+                margin: auto;
+            }
+
+            .Proj{
+                margin-top: 20px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                justify-content: space-between;
+                gap: 200px;
+
+                #John_Doe{
+                    img{
+                        max-width: 736px;
+                        max-height: 256px;
+                    }
+                }
+
+                #Home_Key{
+                    img{
+                        max-width: 736px;
+                        max-height: 256px;
+                    }   
+                }
+            }
+        }
     }
 }
