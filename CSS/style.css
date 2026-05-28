@@ -37,10 +37,25 @@ header{
     width: 100%;
     background-color: var(--DeepPurple);
 
+    #logo{
+        list-style: none;
+
+        a{
+            text-decoration: none;
+            margin-left: 150px;
+            font-size: 20px;
+            font-family: var(--TittleFont);
+
+                &:hover{
+                transition: all 0.2s ease-in-out;
+                color:var(--NeonMagenta);
+            }
+        }
+    }
 
     div{
         display: flex;
-        justify-content: space-between;
+        justify-content: end;
         margin: 20px;
 
         li{
@@ -461,6 +476,94 @@ footer{
 
                 td{
                     border: 1px solid var(--NeonMagenta);
+                }
+            }
+        }    
+    }
+
+    .parcours{
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+
+        h2{
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.Loisirs{
+    max-width: 1440px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+
+    .passetemps{
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        align-items: center;
+
+        h2{
+            font-size: 40px;
+        }
+
+        p{
+            font-size: 20px;
+        }
+
+        .passion{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            margin-top: 30px;
+
+            .info{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                border: 2px solid var(--NeonMagenta);
+
+                p{
+                    text-align: center;
+                }
+            }
+
+            .jeux{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                border: 2px solid var(--NeonMagenta);
+
+                p{
+                    text-align: center;
+                }
+            }
+
+            .lecture{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                border: 2px solid var(--NeonMagenta);
+
+                p{
+                    text-align: center;
+                }
+            }
+
+            .jap{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                border: 2px solid var(--NeonMagenta);
+
+                p{
+                    text-align: center;
                 }
             }
         }
