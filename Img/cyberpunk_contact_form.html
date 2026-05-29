@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulaire de contact — Cyberpunk</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #05050a;
+      padding: 2rem;
+    }
+
+    .cp-root {
+      font-family: 'Share Tech Mono', monospace;
+      background: #0a0a0f;
+      color: #00ffe7;
+      padding: 2rem;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 640px;
+    }
+
+    .cp-root::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,255,231,0.015) 2px,
+        rgba(0,255,231,0.015) 4px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .cp-root * { position: relative; z-index: 1; }
+
+    .cp-header { margin-bottom: 2rem; }
+
+    .cp-badge {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: #ff2d78;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .cp-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #00ffe7;
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(0,255,231,0.4);
+      line-height: 1.2;
+    }
+
+    .cp-title span {
+      color: #ff2d78;
+      text-shadow: 0 0 20px rgba(255,45,120,0.5);
+    }
+
+    .cp-divider {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .cp-line {
+      height: 1px;
+      background: linear-gradient(90deg, #ff2d78, #00ffe7);
+      flex: 1;
+    }
+
+    .cp-diamond {
+      width: 6px;
+      height: 6px;
+      background: #ff2d78;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .cp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .cp-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .cp-field.full { grid-column: 1 / -1; }
+
+    .cp-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: #ff2d78;
+      text-transform: uppercase;
+    }
+
+    .cp-input-wrap { position: relative; }
+
+    .cp-input-wrap::before {
+      content: '>';
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #00ffe7;
+      font-size: 12px;
+      pointer-events: none;
+    }
+
+    .cp-input-wrap.textarea-wrap::before {
+      top: 14px;
+      transform: none;
+    }
+
+    .cp-input {
+      width: 100%;
+      background: rgba(0,255,231,0.04);
+      border: 1px solid rgba(0,255,231,0.2);
+      border-left: 2px solid #00ffe7;
+      color: #00ffe7;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      padding: 10px 12px 10px 28px;
+      border-radius: 0;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      appearance: none;
+    }
+
+    .cp-input::placeholder { color: rgba(0,255,231,0.25); }
+
+    .cp-input:focus {
+      border-color: #ff2d78;
+      border-left-color: #ff2d78;
+      background: rgba(255,45,120,0.05);
+    }
+
+    .cp-corner {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #ff2d78;
+      border-bottom: 2px solid #ff2d78;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .cp-input:focus ~ .cp-corner { opacity: 1; }
+
+    .cp-corner-tl {
+      top: 0;
+      left: 0;
+      right: auto;
+      bottom: auto;
+      border-right: none;
+      border-bottom: none;
+      border-left: 2px solid #ff2d78;
+      border-top: 2px solid #ff2d78;
+    }
+
+    .cp-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .cp-select { cursor: pointer; }
+
+    .cp-select option {
+      background: #0a0a0f;
+      color: #00ffe7;
+    }
+
+    .cp-check-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cp-check-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 12px;
+      color: rgba(0,255,231,0.7);
+      transition: color 0.2s;
+    }
+
+    .cp-check-label:hover { color: #00ffe7; }
+
+    .cp-checkbox {
+      width: 14px;
+      height: 14px;
+      border: 1px solid rgba(0,255,231,0.4);
+      background: transparent;
+      appearance: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .cp-checkbox:checked {
+      background: #ff2d78;
+      border-color: #ff2d78;
+    }
+
+    .cp-checkbox:checked::after {
+      content: '✓';
+      position: absolute;
+      top: -2px;
+      left: 1px;
+      font-size: 11px;
+      color: #0a0a0f;
+      font-weight: 700;
+    }
+
+    .cp-submit-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .cp-btn {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      background: transparent;
+      border: 1px solid #ff2d78;
+      color: #ff2d78;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.2s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+
+    .cp-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #ff2d78;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+      z-index: 0;
+    }
+
+    .cp-btn:hover::before { transform: scaleX(1); }
+    .cp-btn:hover { color: #0a0a0f; }
+    .cp-btn span { position: relative; z-index: 1; }
+
+    .cp-status {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: rgba(0,255,231,0.4);
+    }
+
+    .cp-status::before { content: '[ '; color: rgba(0,255,231,0.2); }
+    .cp-status::after  { content: ' ]'; color: rgba(0,255,231,0.2); }
+
+    .cp-footer {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0,255,231,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cp-footer-code {
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: rgba(0,255,231,0.2);
+    }
+
+    .cp-blink { animation: blink 1.2s step-end infinite; }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    .cp-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .cp-success.visible { display: block; }
+
+    .cp-success-icon {
+      font-size: 32px;
+      color: #00ffe7;
+      margin-bottom: 1rem;
+    }
+
+    .cp-success-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 16px;
+      color: #00ffe7;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+    }
+
+    .cp-success-msg {
+      font-size: 12px;
+      color: rgba(0,255,231,0.5);
+      letter-spacing: 1px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 480px) {
+      .cp-grid { grid-template-columns: 1fr; }
+      .cp-field.full { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cp-root">
+
+  <div id="formContent">
+
+    <div class="cp-header">
+      <p class="cp-badge">// transmission_initiale.exe</p>
+      <h1 class="cp-title">Établir <span>contact</span><br>avec la matrice</h1>
+    </div>
+
+    <div class="cp-divider">
+      <div class="cp-line"></div>
+      <div class="cp-diamond"></div>
+      <div class="cp-line"></div>
+    </div>
+
+    <div class="cp-grid">
+
+      <div class="cp-field">
+        <label class="cp-label" for="cp-nom">// identifiant</label>
+        <div class="cp-input-wrap">
+          <input class="cp-input" id="cp-nom" type="text" placeholder="Votre nom" autocomplete="off" />
+          <div class="cp-corner"></div>
+          <div class="cp-corner cp-corner-tl"></div>
+        </div>
+      </div>
+
+      <div class="cp-field">
+        <label class="cp-label" for="cp-prenom">// alias</label>
+        <div class="cp-input-wrap">
+          <input class="cp-input" id="cp-prenom" type="text" placeholder="Votre prénom" autocomplete="off" />
+          <div class="cp-corner"></div>
+          <div class="cp-corner cp-corner-tl"></div>
+        </div>
+      </div>
+
+      <div class="cp-field full">
+        <label class="cp-label" for="cp-email">// adresse_signal</label>
+        <div class="cp-input-wrap">
+          <input class="cp-input" id="cp-email" type="email" placeholder="adresse@domaine.net" autocomplete="off" />
+          <div class="cp-corner"></div>
+          <div class="cp-corner cp-corner-tl"></div>
+        </div>
+      </div>
+
+      <div class="cp-field full">
+        <label class="cp-label" for="cp-sujet">// canal_transmission</label>
+        <div class="cp-input-wrap">
+          <select class="cp-input cp-select" id="cp-sujet">
+            <option value="">Sélectionner un sujet...</option>
+            <option>Mission de collaboration</option>
+            <option>Demande technique</option>
+            <option>Signalement d'anomalie</option>
+            <option>Autre protocole</option>
+          </select>
+          <div class="cp-corner"></div>
+          <div class="cp-corner cp-corner-tl"></div>
+        </div>
+      </div>
+
+      <div class="cp-field full">
+        <label class="cp-label" for="cp-message">// contenu_crypté</label>
+        <div class="cp-input-wrap textarea-wrap">
+          <textarea class="cp-input cp-textarea" id="cp-message" placeholder="Entrez votre message ici..."></textarea>
+          <div class="cp-corner"></div>
+          <div class="cp-corner cp-corner-tl"></div>
+        </div>
+      </div>
+
+      <div class="cp-field full">
+        <label class="cp-label">// protocoles_actifs</label>
+        <div class="cp-check-group">
+          <label class="cp-check-label">
+            <input type="checkbox" class="cp-checkbox" />
+            Recevoir une confirmation de transmission
+          </label>
+          <label class="cp-check-label">
+            <input type="checkbox" class="cp-checkbox" />
+            Accepter les conditions d'utilisation du réseau
+          </label>
+          <label class="cp-check-label">
+            <input type="checkbox" class="cp-checkbox" />
+            Autoriser le cryptage des données personnelles
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cp-submit-row">
+      <button class="cp-btn" onclick="handleSubmit()"><span>Transmettre</span></button>
+      <span class="cp-status" id="cpStatus">EN ATTENTE</span>
+    </div>
+
+    <div class="cp-footer">
+      <span class="cp-footer-code">SEC_LEVEL :: ALPHA-7</span>
+      <span class="cp-footer-code">NODE_ID :: 0xFF2D78<span class="cp-blink">_</span></span>
+    </div>
+
+  </div>
+
+  <div class="cp-success" id="successMsg">
+    <div class="cp-success-icon"><i class="ti ti-check"></i></div>
+    <p class="cp-success-title">Transmission réussie</p>
+    <p class="cp-success-msg">// message crypté envoyé vers la matrice<br>Nous vous recontacterons sous 48h.</p>
+  </div>
+
+</div>
+
+<script>
+  function handleSubmit() {
+    const nom     = document.getElementById('cp-nom').value.trim();
+    const email   = document.getElementById('cp-email').value.trim();
+    const message = document.getElementById('cp-message').value.trim();
+    const status  = document.getElementById('cpStatus');
+
+    if (!nom || !email || !message) {
+      status.textContent = 'ERREUR :: CHAMPS REQUIS';
+      status.style.color = '#ff2d78';
+      setTimeout(() => {
+        status.textContent = 'EN ATTENTE';
+        status.style.color = '';
+      }, 2500);
+      return;
+    }
+
+    status.textContent = 'TRANSMISSION...';
+    status.style.color = '#00ffe7';
+
+    setTimeout(() => {
+      document.getElementById('formContent').style.display = 'none';
+      document.getElementById('successMsg').classList.add('visible');
+    }, 1200);
+  }
+</script>
+
+</body>
+</html>
