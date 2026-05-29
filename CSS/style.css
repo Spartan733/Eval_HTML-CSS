@@ -675,4 +675,123 @@ footer{
     margin: auto;
     display: flex;
     flex-direction: column;
+
+    h2{
+        padding-top: 70px;
+        margin: auto;
+        padding-bottom: 20px;
+        font-size: 50px;
+    }
+
+    p{
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    .formulaire2{
+        background: var(--NightGrid);
+        border: 5px solid var(--NeonMagenta);
+        border-radius: 16px;
+        padding: 2rem;
+        width: 100%;
+        max-width: 500px;
+        margin: auto;
+
+        form{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 16px;
+
+            label{
+                font-size: 20px;
+                font-weight: 500;
+                /* color: #333; */
+                align-self: end;
+            }
+
+            input[type="text"]{
+                padding: 10px 12px;
+                border: 3px solid var(--NeonMagenta);
+                border-radius: 8px;
+                font-size: 14px;
+                background: white;
+                outline: none;
+                width: 100%;
+            }
+
+            input[type="email"]{
+                padding: 10px 12px;
+                border: 3px solid var(--NeonMagenta);
+                border-radius: 8px;
+                font-size: 18px;
+                background: white;
+                outline: none;
+                width: 100%;
+                color: var(--DeepPurple);
+            }
+
+            input[type="text"]:focus{
+                grid-column: 1 / -1;
+            }
+
+            input[type="email"]:focus{
+                grid-column: 1 / -1;
+            }
+
+            label[for="message"]{
+                grid-column: 1 / -1;
+            }
+
+            textarea{
+                grid-column: 1 / -1;
+                padding: 10px 12px;
+                border: 3px solid var(--NeonMagenta);
+                border-radius: 8px;
+                font-size: 14px;
+                background: var(--GhosWhite);
+                resize: vertical;
+                outline: none;
+                width: 100%;
+            }
+
+            textarea:focus{
+                border-color: var(--NeonMagenta);
+            }
+
+            .checkbox-ligne{
+                grid-column: 1 / -1;
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                font-size: 18px;
+                color: #555;
+                line-height: 1.5;
+            }
+
+            input[type="checkbox"] {
+                margin-top: 2px;
+                flex-shrink: 0;
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+            }
+
+            button{
+                margin-top: 1rem;
+                background: var(--void);
+                color: var(--ElectricCyan);
+                border: 3px solid var(--NeonMagenta);
+                border-radius: 8px;
+                padding: 12px 20px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                width: fit-content;
+
+                &:hover {
+                    color: var(--NeonMagenta);
+                }
+            }
+        }   
+    }
 }
