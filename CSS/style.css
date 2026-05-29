@@ -686,6 +686,7 @@ footer{
     p{
         text-align: center;
         line-height: 1.6;
+        margin-bottom: 10px;
     }
 
     .formulaire2{
@@ -713,10 +714,12 @@ footer{
                 padding: 10px 12px;
                 border: 3px solid var(--NeonMagenta);
                 border-radius: 8px;
-                font-size: 14px;
+                font-size: 18px;
+                font-weight: 700;
                 background: white;
                 outline: none;
                 width: 100%;
+                color: var(--DeepPurple);
             }
 
             input[type="email"]{
@@ -724,6 +727,7 @@ footer{
                 border: 3px solid var(--NeonMagenta);
                 border-radius: 8px;
                 font-size: 18px;
+                font-weight: 700;
                 background: white;
                 outline: none;
                 width: 100%;
@@ -747,11 +751,13 @@ footer{
                 padding: 10px 12px;
                 border: 3px solid var(--NeonMagenta);
                 border-radius: 8px;
-                font-size: 14px;
+                font-size: 18px;
+                font-weight: 700;
                 background: var(--GhosWhite);
                 resize: vertical;
                 outline: none;
                 width: 100%;
+                color: var(--DeepPurple);
             }
 
             textarea:focus{
@@ -792,6 +798,41 @@ footer{
                     color: var(--NeonMagenta);
                 }
             }
-        }   
+        } 
+         
+    }
+
+    .social{
+        display: flex;
+        margin: auto;
+
+        #reseau{
+            display: flex;
+            font-size: 20px;
+            margin: auto;
+
+            ul{
+                list-style: none;
+                margin: auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 20px;
+
+                a{
+                   text-decoration: none;     
+                    &:hover{
+                        transition: all 0.2s ease-in-out;
+                        color:var(--NeonMagenta);
+                    }
+
+                    i{
+                       &:hover{
+                            transition: all 0.2s ease-in-out;
+                            color:var(--NeonMagenta);
+                        } 
+                    }
+                }
+            }
+        }
     }
 }
